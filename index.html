@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Texas Hold'em Poker - Hand Evaluator</title>
+		<script type="text/javascript" src="jquery-3.2.1.js"></script>
+		<script type="text/javascript" src="main.js"></script>
+	</head>
+
+	<body>
+		<h1>Texas Hold'em Poker Evaluator</h1>
+		<h3>Enter Community Cards</h3>
+		<input type="text" id="community-cards" name="community-cards" placeholder="AD KS TH JC QS" value="AD KS TH JC QS"">
+		<div>
+			<p>AD KS TH JC QS</p>
+		</div>
+
+		<h3>Enter Player Names - Hand cards each player separated by new line</h3>
+		<textarea rows="5" cols="100" id="player-hands" name="player-hands" placeholder="John AH KD&#10;SAM TS 2C">John AH KD&#10;SAM TS 2C</textarea>
+		<div>
+			<p>
+				John AH KD <br />
+				SAM TS 2C <br />
+				Jane 3S 5D <br />
+			</p>
+		</div>
+		<button id="evaluate-hand">Evaluate Hand</button>
+		<div id="hand-ranks">
+			<span id=hand-rank-results></span>
+		</div>
+	</body>
+</html> 
