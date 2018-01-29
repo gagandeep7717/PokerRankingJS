@@ -1,0 +1,43 @@
+*** ENTRIES()
+	Array.prototype.entries() - Iterator for Array
+	var iterator1 = array1.entries();
+
+	console.log(iterator1.next().value);
+	// expected output: Array [0, "a"]
+
+	console.log(iterator1.next().value);
+	// expected output: Array [1, "b"]
+
+*** EVERY(function(item))
+	function isBelowThreshold(currentValue) {
+	  return currentValue < 40;
+	}
+
+	var array1 = [1, 30, 39, 29, 10, 13];
+
+	console.log(array1.every(isBelowThreshold));
+	// expected output: true
+
+
+*** KEYS returns iterator with all elements and index
+	var arr = ['a', 'b', 'c'];
+	var iterator = arr.keys();
+
+	console.log(iterator.next()); // { value: 0, done: false }
+
+*** VALUES - returns iterator with all values
+	var a = ['w', 'y', 'k', 'o', 'p']; 
+	var iterator = a.values();
+
+	console.log(iterator.next().value); // w 
+	console.log(iterator.next().value); // y 
+	console.log(iterator.next().value); // k 
+	console.log(iterator.next().value); // o 
+	console.log(iterator.next().value); // p
+
+*** pop() - removes last element
+*** shift() - removes first element
+
+
+*** push() - append element 
+*** unshift() - adds one or more elements at the beginning of array
