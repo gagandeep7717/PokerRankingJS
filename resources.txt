@@ -1,6 +1,14 @@
+
+*** pop() - removes last element
+*** shift() - removes first element
+
+
+*** push() - append element 
+*** unshift() - adds one or more elements at the beginning of array
+
 *** ENTRIES()
 	Array.prototype.entries() - Iterator for Array
-	var iterator1 = array1.entries();
+	var iterato splice javar1 = array1.entries();
 
 	console.log(iterator1.next().value);
 	// expected output: Array [0, "a"]
@@ -35,9 +43,11 @@
 	console.log(iterator.next().value); // o 
 	console.log(iterator.next().value); // p
 
-*** pop() - removes last element
-*** shift() - removes first element
+*** FILTER() - new array of all elements that pass test implemented by provided function
 
+var words = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present'];
 
-*** push() - append element 
-*** unshift() - adds one or more elements at the beginning of array
+const result = words.filter(word => word.length > 6);
+
+console.log(result);
+// expected output: Array ["exuberant", "destruction", "present"]
