@@ -1,18 +1,20 @@
 /*
 * Author: Gagandeep Randhawa
 * Date Created: Thursday, January 25, 2018
-* 
+*
+*/ 
+
+/*
+---- Sample Input ---
+2D 3S TH JC QS
+
 
 John AH KD
 SAM 3S 3C
 Jane 9H 8C
 Ken 2H 3D
-
-2D 3S TH JC QS
-
 */
 
-//var prompt = require('prompt');
 
 const cardSet = ['A', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K'];
 const cardValuesMap = {'2':2, '3':3, '4':4, '5':5 , '6':6, '7':7, '8':8, '9':9, 'T':10, 'J':11, 'Q':12, 'K':13, 'A':14};
@@ -33,7 +35,6 @@ $(window).on('load', () => {
 
 
 function getUserData() {
-	//evaluateccInput()
 	validateAndSetCCInput(() => {
 		validateAndSetPlayerHands(() => {
 			evaluatePokerHands(() => {
@@ -45,16 +46,15 @@ function getUserData() {
 
 function validateAndSetCCInput(setplayerHands){
 	let ccInput = jQuery("#community-cards").val().trim().split(" ");
-	//Validate CCInput not empty or less than 5
+
 	if(ccInput.length < 5){
-		//document.getElementById("hand-rank-results").innerHTML = "Required Community Cards 5";
 		jQuery("#hand-rank-results").text("Required Community Cards 5");
 	}
+
 	else{
-		//ValidateCard And Suit Here
 		communityCards = ccInput;
 		console.log(communityCards);
-		//document.getElementById("hand-rank-results").innerHTML = "";
+
 		jQuery("#hand-rank-results").text("");
 		setplayerHands();
 	}
@@ -63,11 +63,10 @@ function validateAndSetCCInput(setplayerHands){
 function validateAndSetPlayerHands(evaluateHands){
 	let playerInputs = jQuery("#player-hands").val();
 	if(playerInputs === ""){
-		//document.getElementById("hand-rank-results").innerHTML = "Please Enter atleast 1 Player Hands";
 		jQuery("#hand-rank-results").text("Please Enter atleast 1 Player Hands");
 	}
 	else{
-		//document.getElementById("hand-rank-results").innerHTML = "";
+
 		jQuery("#hand-rank-results").text("");
 		let playerInputsSplitbyNewLine = playerInputs.split("\n");
 		playerInputsSplitbyNewLine.forEach((item, index, array) => {
@@ -76,14 +75,13 @@ function validateAndSetPlayerHands(evaluateHands){
 			playerRanks[entry[0].toString().trim()] = 0
 		});
 		console.log("Player Map: ", playerCards); 
-		////console.log("Player Ranks: ", playerRanks);
 		evaluateHands();
 	}
 	
 }
 
 function printResult(){
-	//document.getElementById("hand-rank-results").innerHTML = "";
+
 	console.log("Inside Print Results ", )
 	jQuery("#hand-ranks").empty();
 	for(i=1; i <= Object.keys(playerRanks).length+10; i++){
@@ -103,10 +101,6 @@ function evaluatePokerHands(printPlayerRanks){
 	}
 
 	printPlayerRanks();
-
-	//console.log("Player Ranks: ", playerRanks)
-	// TODO
-	// SET POKER RANK RESULTS HERE
 }
 
 function calculateRankForEachPlayer(player, playerHand){
@@ -120,52 +114,37 @@ function calculateRankForEachPlayer(player, playerHand){
 
 	//console.log(isStraight(player, evalCards)[0], isStraight(player, evalCards)[1]);
 	if(isRoyalFlush(player, evalCards, evalSuits, straightFlags)){
-		console.log("Player: ", player, "Rank: ", playerRanks[player].rank, "Message: ", playerRanks[player].message);
-		//pass
-		//10
+	
 	}
 	else if(isStraightFlush(player, evalCards, evalSuits, straightFlags)){
-		//Change Rank here to 2
-		//pass
+
 	}
 	else if(isFourOfAKind(player, evalCards)){
-		//Change Rank here to 3
 		console.log("IT IS FOUR OF A KIND!")
 	}
 	else if(isFullHouse(player, evalCards)){
-		//Change Rank here to 4
 		console.log("FULL HOUSE!")
 	}
 	else if(isFlush(player, evalSuits)){
-		//Change Rank here to 5
 		console.log("IT IS A FLUSH");
 	}
 	else if(JSON.stringify(straightFlags) === JSON.stringify([true, true])){
-		//Change Rank here to 6
 		console.log(player, " - ACE STRAIGHT");
-		//pass
 	}
 	else if(JSON.stringify(straightFlags) === JSON.stringify([true, false])){
-		//Change Rank here to 7
 		console.log(player, " - STRAIGHT");
-		//pass
-		//5
 	}
 	else if(isThreeOfAKind(player, evalCards)){
-		//Change Rank here to 8
 		console.log("THREE OF KIND")
-		//4
 	}
 	else if(isOneOrTwoPair(player, evalCards)){
-		//Change Rank here to 9 10
 		console.log("PAIR Orders")
-		//3
 	}
 	else{
 		//Change Rank here to 11, 12, 13, 14, 15 depending on number of players
 		//1
 		//EvaluateHighCard here if no result assigned
-		//Flawed Logic
+
 		console.log("Evaluate players for highCard - ", player);
 	}
 
@@ -205,7 +184,6 @@ function isRoyalFlush(player, evalCards, evalSuits, straightFlags) {
 	if(isFlush(player, evalSuits) && JSON.stringify(straightFlags) === JSON.stringify([true, true])) {
 		playerRanks[player].rank = 1;
 		playerRanks[player].message = "Royal Flush"
-		//console.log(player, " - ROYAL FLUSH!!!")
 		return true;
 	}
 	return false;
@@ -215,7 +193,6 @@ function isStraightFlush(player, evalCards, evalSuits, straightFlags) {
 	if(isFlush(player, evalSuits) && JSON.stringify(straightFlags) === JSON.stringify([true, false])){
 		playerRanks[player].rank = 2;
 		playerRanks[player].message = "Straight Flush"
-		//console.log(player, " - Straight Flush!!")
 		return true;
 	}
 	return false;
@@ -223,7 +200,6 @@ function isStraightFlush(player, evalCards, evalSuits, straightFlags) {
 
 function isAceStraight(player, evalCards){
 	if(JSON.stringify(straightFlags) === JSON.stringify([true, true])) {
-		console.log(player, " - Ace Straight!!")
 		return true;
 	}
 	return false;
@@ -243,8 +219,6 @@ function isStraight(player, evalCards) {
 	});
 
 	let straightSequence = findSequence(evalCardValues);
-
-	// console.log("[DEBUG] Straight Sequence Found : ", straightSequence, straightSequence.length);
 
 	if(straightSequence.length >= 5){
 		for(i=0; i<straightSequence.length-5; i++){
@@ -283,7 +257,7 @@ function findSequence(arr){
 		if(arr[i] === arr[i+1] - 1){
 			straightArr.push(arr[i+1]);
 			++count;
-			//console.log(straightArr)
+			//console.log("[DEBUG] - ", straightArr)
 		}
 		else if (straightArr.length >= 5){
 			return straightArr;
@@ -353,7 +327,6 @@ function isOneOrTwoPair(player, evalCards) {
 	Object.keys(cardCountsMap).filter((key) => { if(cardCountsMap[key]===2){kind2Keys.push(key)}});
 
 	console.log(kind2Keys);
-	//let kind2Key = Object.keys(cardCountsMap).find(key => cardCountsMap[key] === 2);
 	if(kind2Keys.length === 2 && playerRanks[player].rank == undefined){		//Check how many pairs exist by length
 		playerRanks[player] = {"rank": 9, "message": " Two Pair - " + kind2Keys[0] + " and " + kind2Keys[1]};
 		console.log("Player: ", player, "Player Rank: ", playerRanks[player].rank, "Message: ", playerRanks[player].message);
@@ -368,8 +341,6 @@ function isOneOrTwoPair(player, evalCards) {
 }
 
 
-
-// Complete
 function isHighCard() {
 	let allHands = [];
 	let playerHighCardMap = Object.assign({}, playerCards);
@@ -386,13 +357,3 @@ function isHighCard() {
 	playerRanks[highCardPlayer] = 1;
 	console.log(playerRanks);
 }
-
-/*
-	var promise = new Promise((resolve, reject) => {
-		console.log("Promise Start")
-	});
-
-	promise.then(enterCC()).then(enterPlayerCards()).catch((reason) => {
-		console.log("Invalid input")
-	})
-*/
